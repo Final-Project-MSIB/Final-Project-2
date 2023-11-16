@@ -16,14 +16,16 @@ const verifyToken = async (token) => {
 
 const authentication = async (req, res, next) => {
   try {
-    const token = req.headers["authorization"];
-
+    let token = req.headers["authorization"] || req.headers["token"];
     if (!token) {
       res.status(401).json({
         message: "Unauthorized",
       });
     } else {
-      const decode = await verifyToken(token?.split(" ")?.[1]);
+      if (token?.split(" ").length > 1) {
+        token = token?.split(" ")?.[1];
+      }
+      const decode = await verifyToken(token);
       req.user = decode;
       next();
     }
