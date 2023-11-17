@@ -16,7 +16,7 @@ const deleteSocialMedia = async (req, res) => {
     }
 
     const UserId = req.user.id;
-
+// checking if the user is authorized to delete the social media
     if (findSocialMedia.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to delete this social media",
@@ -57,7 +57,7 @@ const updateSocialMedia = async (req, res) => {
     }
 
     const UserId = req.user.id;
-
+// checking if the user is authorized to edit the social media
     if (findSocialMedia.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to edit this social media",

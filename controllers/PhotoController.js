@@ -121,7 +121,7 @@ const updatePhoto = async (req, res) => {
     }
 
     const UserId = req.user.id;
-
+// cheching if the user is authorized to edit the photo
     if (photoData.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to edit this photo",
@@ -184,7 +184,7 @@ const deletePhoto = async (req, res) => {
     }
 
     const UserId = req.user.id;
-
+// checking if the user is authorized to edit the photo
     if (photoData.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to edit this photo",

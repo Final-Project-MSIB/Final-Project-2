@@ -16,7 +16,7 @@ const editComment = async (req, res) => {
         message: "Comment not found",
       });
     }
-
+//  check if the user is authorized to edit the comment
     if (findComment.UserId !== UserId) {
       return res.status(403).json({
         message: "You are not authorized to edit this comment",
@@ -58,7 +58,7 @@ const deleteComment = async (req, res) => {
         message: "Comment not found",
       });
     }
-
+// check if the user is authorized to delete the comment
     if (findComment.UserId !== UserId) {
       return res.status(403).json({
         message: "You are not authorized to delete this comment",
