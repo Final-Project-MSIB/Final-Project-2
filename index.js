@@ -11,7 +11,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log("App Listening on port " + port);
-});
+module.exports = app;
