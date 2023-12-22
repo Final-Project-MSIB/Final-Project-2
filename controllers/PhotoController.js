@@ -5,12 +5,11 @@ const registerPhoto = async (req, res) => {
     const { poster_image_url, title, caption } = req.body;
 
     const UserId = req.user.id;
-
     const data = {
       poster_image_url,
       title,
       caption,
-      UserId: UserId,
+      UserId,
     };
 
     const createPhoto = await Photos.create(data);
@@ -121,14 +120,14 @@ const updatePhoto = async (req, res) => {
     }
 
     const UserId = req.user.id;
-// cheching if the user is authorized to edit the photo
+    // cheching if the user is authorized to edit the photo
     if (photoData.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to edit this photo",
       });
     }
 
-    const updateData = await Photos.update(
+    await Photos.update(
       {
         poster_image_url,
         title,
@@ -140,12 +139,6 @@ const updatePhoto = async (req, res) => {
         },
       }
     );
-
-    if (updateData[0] === 0) {
-      return res.status(400).json({
-        message: "Update failed",
-      });
-    }
 
     const photo = await Photos.findOne({
       where: {
@@ -184,7 +177,7 @@ const deletePhoto = async (req, res) => {
     }
 
     const UserId = req.user.id;
-// checking if the user is authorized to edit the photo
+    // checking if the user is authorized to edit the photo
     if (photoData.UserId !== UserId) {
       return res.status(401).json({
         message: "You are not authorized to edit this photo",

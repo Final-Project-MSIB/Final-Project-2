@@ -86,10 +86,6 @@ const modifyUser = async (req, res) => {
       }
     );
 
-    if (updateData[0] === 0) {
-      return res.status(400).json({ error: "Modify failed" });
-    }
-
     return res.status(200).json({
       user: {
         email,
@@ -118,13 +114,9 @@ const deleteUser = async (req, res) => {
   }
 
   try {
-    const deleteData = await Users.destroy({
+    await Users.destroy({
       where: { id: userId },
     });
-
-    if (deleteData === 0) {
-      return res.status(400).json({ error: "Failed to delete" });
-    }
 
     return res
       .status(200)
